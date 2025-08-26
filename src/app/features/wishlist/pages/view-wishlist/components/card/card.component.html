@@ -1,0 +1,30 @@
+<div class="p-4">
+  <div class="flex justify-between rounded-lg">
+    <div class="flex flex-shrink-[2] flex-grow-[2] basis-0 flex-col gap-1">
+      <p class="text-sm font-normal leading-normal text-textSecondary">{{ item.price }}$</p>
+      <p class="text-base font-bold leading-tight text-textPrimary">{{ item.name }}</p>
+    </div>
+    <div class="relative aspect-video flex-1 overflow-hidden rounded-lg">
+      <img
+        src="{{ item.img }}"
+        alt="Imagen del producto"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    </div>
+  </div>
+  <div class="flex justify-between py-3">
+    <a
+      [href]="item.link"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex h-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-btnSecondary px-4 text-sm font-bold leading-normal tracking-tight"
+    >
+      View
+    </a>
+    <button
+      class="flex h-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-btnPrimary px-4 text-sm font-bold leading-normal tracking-tight text-white"
+    >
+      I'll gift it!
+    </button>
+  </div>
+</div>
