@@ -11,6 +11,13 @@ export const routes: Routes = [
             (m) => m.ViewWishlistPage
           ),
       },
+      {
+        path: 'create',
+        loadComponent: () =>
+          import('./features/wishlist/pages/create-wishlist/create-wishlist.page').then(
+            (m) => m.CreateWishlistPage
+          ),
+      },
     ],
   },
 ];
