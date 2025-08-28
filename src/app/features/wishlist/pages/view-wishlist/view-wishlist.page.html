@@ -1,0 +1,13 @@
+<div class="container flex flex-col" *ngIf="wishlist">
+  <img
+    src="{{wishlist.headerImg}}"
+    alt="Portada del evento"
+    class="h-56 w-full object-cover md:h-72"
+  />
+  <h1 class="px-4 pb-3 pt-5 text-center text-h1 font-bold text-textPrimary">{{wishlist.title}}</h1>
+  <wishlist-countdown [expirationDate]="wishlist.expirationDate"></wishlist-countdown>
+  <h3 class="px-4 pb-2 pt-4 text-lg font-bold leading-tight tracking-tight text-textPrimary">
+    Wishlist
+  </h3>
+  <wishlist-card *ngFor="let item of wishlist?.items" [item]="item"></wishlist-card>
+</div>

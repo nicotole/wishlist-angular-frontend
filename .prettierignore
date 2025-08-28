@@ -1,0 +1,17 @@
+dist/
+.angular/
+coverage/
+node_modules/
+
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+.env
+.env.*.local
+*.log
+
+.vscode/
+.idea/
+.DS_Store
+.husky/
