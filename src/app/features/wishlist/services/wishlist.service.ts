@@ -8,7 +8,7 @@ import { Wishlist } from '../models/wishlist.model';
 export class WishlistService {
   whislist = {
     title: 'Cumple de Nico',
-    expirationDate: new Date(1998, 9, 18),
+    expirationDate: new Date(2025, 7, 29),
     headerImg:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuB0DjNPzet54NzTZhNmAk90DCmxQ6X8WWpGmwNQ_144KGbNPw8950JcwZ5ZGRxiC-z2HVv7hKjKs3gpkE1g_zyWxH0iBTcR-LLhDNskctdXNtYuRre2328n9On_ZZg2tOe-UgBisNbnkONK_zF1C5mGM0z4Z-hAsLNHAbywYrC_H-4EuP9Fb1cNHK7IuwG2h8Sv1y2dqq__N0crAWWmez1m9OkUhE-N3y0ySCOp03lOUaXg5bA6xk4vPhMe_yrHbpFbQsb6FQK6lk1z',
     items: [
