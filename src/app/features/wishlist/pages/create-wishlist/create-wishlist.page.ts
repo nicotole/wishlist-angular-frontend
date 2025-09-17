@@ -10,6 +10,7 @@ import {
   imgMimeType,
   imgRequired,
 } from '../../validators/imgFile.validator';
+import { WishlistService } from '../../services/wishlist.service';
 
 @Component({
   selector: 'app-create-wishlist',
@@ -20,7 +21,9 @@ import {
 })
 export class CreateWishlistPage {
   acceptedTypes = DEFAULT_IMG_MIME_TYPES.join(',');
+  private wishlistService = inject(WishlistService);
   private formBuilder = inject(FormBuilder);
+  isOpen = false;
   form = this.formBuilder.group({
     title: this.formBuilder.nonNullable.control('', [Validators.required, Validators.minLength(3)]),
     eventDate: this.formBuilder.nonNullable.control('', [Validators.required]),
@@ -34,46 +37,12 @@ export class CreateWishlistPage {
     }),
   });
 
-  previewUrl: string | null = null;
+  addItemForm = this.formBuilder.group({
+    link: this.formBuilder.nonNullable.control('', [Validators.required]),
+    notes: this.formBuilder.nonNullable.control(''),
+  });
 
-  /*
-  items: Item[] = [
-    {
-      name: 'Green Day - American Idiot (CD Nuevo Original)',
-      price: '$12.000',
-      img: 'https://http2.mlstatic.com/D_NQ_NP_695594-MLU79143085406_092024-O.webp',
-      link: 'https://www.mercadolibre.com.ar/green-day-american-idiot-cd-nuevo-original/p/MLA23045646',
-      notes: 'Clásico álbum de punk rock.',
-    },
-    {
-      name: 'Remera Bring Me The Horizon - BMTH Paraguas',
-      price: '$15.500',
-      img: 'https://http2.mlstatic.com/D_NQ_NP_986757-MLA80803972023_112024-O.webp',
-      link: 'https://articulo.mercadolibre.com.ar/MLA-1461462273-remera-bring-me-the-horizon-bmth-paraguas-tradicional-_JM',
-      notes: 'Soy talle L :)',
-    },
-    {
-      name: "Scott Pilgrim 02 Contra el Mundo - Bryan Lee O'Malley",
-      price: '$9.800',
-      img: 'https://http2.mlstatic.com/D_NQ_NP_669401-MLC42020368373_052020-O.webp',
-      link: 'https://www.mercadolibre.com.ar/scott-pilgrim-02-contra-el-mundo-lee-dmalley-bryan/p/MLA21525911',
-    },
-    {
-      name: 'Nijigahara Holograph - Inio Asano (Tomo Único)',
-      price: '$13.200',
-      img: 'https://http2.mlstatic.com/D_NQ_NP_693416-MLA45271095001_032021-O.webp',
-      link: 'https://www.mercadolibre.com.ar/nijigahara-holograph-tomo-unico-inio-asano-ivrea-manga/p/MLA20944619',
-      notes: 'Si no, en cualquier libreria hay',
-    },
-    {
-      name: 'Joystick Microsoft Xbox Series - Robot White',
-      price: '$72.000',
-      img: 'https://http2.mlstatic.com/D_NQ_NP_863845-MLA45045608183_032021-O.webp',
-      link: 'https://www.mercadolibre.com.ar/joystick-microsoft-xbox-nueva-generacion-robot-white-color-blanco/p/MLA16268161',
-      notes: 'Prefiero color blanco, pero negro esta bien tambien',
-    },
-  ];
-  */
+  previewUrl: string | null = null;
 
   get itemsFA(): FormArray<FormGroup> {
     return this.form.get('items') as FormArray<FormGroup>;
@@ -84,24 +53,31 @@ export class CreateWishlistPage {
   }
 
   addItem() {
-    const itemsFA = this.form.get('items') as FormArray;
-    const itemGroup = this.formBuilder.group({
-      name: this.formBuilder.nonNullable.control('Botella de agua'),
-      price: this.formBuilder.nonNullable.control('$2500'),
-      img: this.formBuilder.nonNullable.control(
-        'https://http2.mlstatic.com/D_NQ_NP_695594-MLU79143085406_092024-O.webp'
-      ),
-      link: this.formBuilder.nonNullable.control(
-        'https://www.mercadolibre.com.ar/green-day-american-idiot-cd-nuevo-original/p/MLA23045646'
-      ),
-      notes: this.formBuilder.control('Clásico álbum de punk rock.'),
+    const { link, notes } = this.addItemForm.getRawValue();
+
+    this.wishlistService.scrapData(link).subscribe((item) => {
+      const newItem: Item = {
+        ...item,
+        notes: notes,
+      };
+      const itemsFA = this.form.get('items') as FormArray;
+      const itemGroup = this.formBuilder.group(newItem);
+      itemsFA.push(itemGroup);
+      console.log(this.form.getRawValue());
+      this.closeAddItem();
     });
-    itemsFA.push(itemGroup);
-    console.log(this.form.getRawValue());
   }
 
   submit() {
     console.log(this.form);
+  }
+
+  openAddItem() {
+    this.isOpen = true;
+  }
+
+  closeAddItem() {
+    this.isOpen = false;
   }
 
   openEditItemModal(i: number) {

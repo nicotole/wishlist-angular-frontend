@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 import { Wishlist } from '../models/wishlist.model';
+import { Item } from '../models/item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +24,16 @@ export class WishlistService {
 
   getWishlist(): Observable<Wishlist> {
     return of(this.whislist);
+  }
+
+  scrapData(link: string): Observable<Item> {
+    const mock: Item = {
+      name: 'Green Day T-Shirt',
+      price: '$100',
+      img: 'https://http2.mlstatic.com/D_NQ_NP_777914-MLA53382213373_012023-O.webp',
+      link,
+    };
+
+    return of(mock).pipe(delay(800));
   }
 }
