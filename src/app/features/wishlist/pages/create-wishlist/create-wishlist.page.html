@@ -1,0 +1,170 @@
+<div class="flex h-screen flex-col">
+  <div class="flex items-center justify-between bg-white p-4 pb-2">
+    <div class="flex size-12 shrink-0 items-center text-textPrimary">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="currentColor"
+        viewBox="0 0 256 256"
+      >
+        <path
+          d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
+        ></path>
+      </svg>
+    </div>
+    <h2
+      class="flex-1 pr-12 text-center text-lg font-bold leading-tight tracking-title text-textPrimary"
+    >
+      Crear evento
+    </h2>
+  </div>
+
+  <div class="container-type-inline-size">
+    <div class="px-4 py-3">
+      <div
+        class="flex min-h-[218px] w-full flex-col justify-end overflow-hidden rounded-lg bg-white bg-cover bg-center bg-no-repeat"
+        style="
+          background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDbXbrAOfl5gYVnOqBPhQ2PLkA1Mi1hd0su_1upiw7kcrqOE1PIichG1m4oKVGDFe173tQzbqbwUKpdit6-yJNBhu7DLPVCRBg41eXgL_d8VAMEV6BrIAQ_MrZ7c_j45h6mp6t0ugeVlqjSWVGEikQfhifAcWgbsanVoz3z_oLVkP0IkVC_l07QNmjgRl2XR4Isnpz5XaFdpRNCnbooQWfyct_r_4vGQknEXTEYuAd-4kdGjlrGmT1IaU-zvW1sEmwZ3aLdCs2C2w3');
+        "
+      ></div>
+    </div>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="min-h-0">
+    <div class="px-04 py-3">
+      <input type="file" [accept]="acceptedTypes" (change)="onFileChange($event)" />
+    </div>
+    <div class="px-4 py-3">
+      <input
+        formControlName="title"
+        placeholder="Nombre del evento"
+        class="h-14 w-full rounded-lg border-none bg-countdownBg p-4 text-textPrimary placeholder:text-textSecondary focus:border-none focus:outline-0 focus:ring-0"
+      />
+    </div>
+    <div class="px-4 py-3">
+      <div class="relative">
+        <input
+          formControlName="eventDate"
+          type="date"
+          required
+          name="eventDate"
+          class="peer h-14 w-full appearance-none rounded-lg border-none bg-countdownBg p-4 pr-12 text-textPrimary invalid:text-transparent focus:outline-0 focus:ring-0 [&::-webkit-calendar-picker-indicator]:opacity-0"
+          onfocus="this.showPicker && this.showPicker()"
+          onclick="this.showPicker && this.showPicker()"
+        />
+
+        <span
+          class="pointer-events-none absolute left-4 top-1/2 ms-[1px] -translate-y-1/2 text-textSecondary transition-opacity peer-valid:opacity-0"
+        >
+          dd/mm/aaaa
+        </span>
+
+        <svg
+          class="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-textPrimary opacity-60"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M7 2v2H5a2 2 0 0 0-2 2v2h18V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm14 8H3v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <h3 class="px-4 pb-2 pt-4 text-lg font-bold leading-tight tracking-title text-textPrimary">
+      Productos
+    </h3>
+
+    <div class="justify-start px-4 py-3">
+      <button
+        (click)="openAddItem()"
+        class="h-10 w-full cursor-pointer rounded-lg bg-btnSecondary font-bold text-textPrimary"
+      >
+        Agregar ítem
+      </button>
+    </div>
+
+    <div class="">
+      <create-card
+        *ngFor="let ctrl of itemsFA.controls; let i = index"
+        [item]="ctrl.getRawValue()"
+        (edit)="openEditItemModal(i)"
+        (remove)="removeItem(i)"
+      >
+      </create-card>
+    </div>
+    <div class="px-4 py-3">
+      <button
+        type="submit"
+        class="h-12 w-full rounded-lg bg-btnPrimary px-5 text-base font-bold leading-normal tracking-[0.015em] text-white"
+        [disabled]="form.invalid"
+      >
+        Crear
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="isOpen" class="overflow-y-auto">
+    <div class="fixed inset-0 bg-black bg-opacity-50"></div>
+    <div
+      class="fixed bottom-0 left-0 right-0 rounded-t-lg bg-white p-4 transition-transform duration-300 ease-in-out"
+    >
+      <div class="flex items-center justify-end bg-white p-4 pb-2">
+        <div class="flex w-12 items-center justify-end">
+          <button (click)="closeAddItem()">
+            <div class="text-textPrimary" data-icon="X" data-size="24px" data-weight="regular">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24px"
+                height="24px"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
+                ></path>
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+      <h1 class="mb-5 text-h1 font-bold leading-tight tracking-title text-textPrimary">Agregar</h1>
+      <form [formGroup]="addItemForm" (ngSubmit)="addItem()">
+        <div class="mb-4">
+          <input
+            formControlName="link"
+            type="text"
+            placeholder="Link"
+            id="link"
+            class="h-14 w-full rounded-lg border-none bg-countdownBg p-4 text-textPrimary placeholder:text-textSecondary focus:border-none focus:outline-0 focus:ring-0"
+          />
+        </div>
+        <div class="mb-4">
+          <textarea
+            formControlName="notes"
+            id="aclaraciones"
+            placeholder="Aclaraciones..."
+            class="h-32 w-full rounded-lg border-none bg-countdownBg p-4 text-textPrimary placeholder:text-textSecondary focus:border-none focus:outline-0 focus:ring-0"
+          ></textarea>
+        </div>
+        <div class="flex-col space-y-4">
+          <button
+            type="button"
+            (click)="closeAddItem()"
+            class="h-12 w-full rounded-lg bg-btnSecondary px-5 text-base font-bold leading-normal tracking-title text-textPrimary"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            [disabled]="addItemForm.invalid"
+            class="h-12 w-full rounded-lg bg-btnPrimary px-5 text-base font-bold leading-normal tracking-title text-white"
+          >
+            Aceptar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

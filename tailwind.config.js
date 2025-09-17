@@ -16,6 +16,9 @@ module.exports = {
         btnPrimary: '#309be8',
         btnSecondary: '#f0f3f4',
       },
+      letterSpacing: {
+        title: '-0.015em',
+      },
     },
   },
   plugins: [],
