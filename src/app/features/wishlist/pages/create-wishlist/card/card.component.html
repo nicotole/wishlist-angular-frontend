@@ -1,15 +1,15 @@
 <div class="p-4">
   <div class="flex items-stretch justify-between gap-4 rounded-lg">
-    <div class="flex flex-[2_2_0px] flex-col gap-1">
-      <p class="font-bold leading-tight text-textPrimary">{{ item.name }}</p>
-      <p class="text-sm text-textSecondary">{{ item.price }}</p>
-      <p class="text-sm text-textSecondary">{{ item.notes }}</p>
-    </div>
     <div
       class="aspect-video w-full flex-1 rounded-lg bg-cover bg-center bg-no-repeat"
       style="
           background-image: url('{{ item.img }}');
         "
     ></div>
+    <div class="flex flex-[2_2_0px] flex-col gap-1">
+      <p class="font-bold leading-tight text-textPrimary">{{ item.name }}</p>
+      <p class="text-sm text-textSecondary">{{ item.price }}</p>
+      <p class="text-sm text-textSecondary">{{ item.notes }}</p>
+    </div>
   </div>
 </div>

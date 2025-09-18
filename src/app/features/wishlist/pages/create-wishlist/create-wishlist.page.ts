@@ -10,18 +10,17 @@ import {
   imgMimeType,
   imgRequired,
 } from '../../validators/imgFile.validator';
-import { WishlistService } from '../../services/wishlist.service';
+import { ModalComponent } from './modal/modal.component';
 
 @Component({
   selector: 'app-create-wishlist',
   standalone: true,
-  imports: [CardComponent, CommonModule, ReactiveFormsModule],
+  imports: [CardComponent, CommonModule, ReactiveFormsModule, ModalComponent],
   templateUrl: './create-wishlist.page.html',
   styleUrl: './create-wishlist.page.css',
 })
 export class CreateWishlistPage {
   acceptedTypes = DEFAULT_IMG_MIME_TYPES.join(',');
-  private wishlistService = inject(WishlistService);
   private formBuilder = inject(FormBuilder);
   isOpen = false;
   form = this.formBuilder.group({
@@ -37,11 +36,6 @@ export class CreateWishlistPage {
     }),
   });
 
-  addItemForm = this.formBuilder.group({
-    link: this.formBuilder.nonNullable.control('', [Validators.required]),
-    notes: this.formBuilder.nonNullable.control(''),
-  });
-
   previewUrl: string | null = null;
 
   get itemsFA(): FormArray<FormGroup> {
@@ -52,20 +46,12 @@ export class CreateWishlistPage {
     return ctrl.getRawValue() as Item;
   }
 
-  addItem() {
-    const { link, notes } = this.addItemForm.getRawValue();
-
-    this.wishlistService.scrapData(link).subscribe((item) => {
-      const newItem: Item = {
-        ...item,
-        notes: notes,
-      };
-      const itemsFA = this.form.get('items') as FormArray;
-      const itemGroup = this.formBuilder.group(newItem);
-      itemsFA.push(itemGroup);
-      console.log(this.form.getRawValue());
-      this.closeAddItem();
-    });
+  addItem(item: Item) {
+    const itemsFA = this.form.get('items') as FormArray;
+    const itemGroup = this.formBuilder.group(item);
+    itemsFA.push(itemGroup);
+    console.log(this.form.getRawValue());
+    this.closeAddItem();
   }
 
   submit() {
