@@ -104,67 +104,9 @@
       </button>
     </div>
   </form>
-
-  <div *ngIf="isOpen" class="overflow-y-auto">
-    <div class="fixed inset-0 bg-black bg-opacity-50"></div>
-    <div
-      class="fixed bottom-0 left-0 right-0 rounded-t-lg bg-white p-4 transition-transform duration-300 ease-in-out"
-    >
-      <div class="flex items-center justify-end bg-white p-4 pb-2">
-        <div class="flex w-12 items-center justify-end">
-          <button (click)="closeAddItem()">
-            <div class="text-textPrimary" data-icon="X" data-size="24px" data-weight="regular">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
-                ></path>
-              </svg>
-            </div>
-          </button>
-        </div>
-      </div>
-      <h1 class="mb-5 text-h1 font-bold leading-tight tracking-title text-textPrimary">Agregar</h1>
-      <form [formGroup]="addItemForm" (ngSubmit)="addItem()">
-        <div class="mb-4">
-          <input
-            formControlName="link"
-            type="text"
-            placeholder="Link"
-            id="link"
-            class="h-14 w-full rounded-lg border-none bg-countdownBg p-4 text-textPrimary placeholder:text-textSecondary focus:border-none focus:outline-0 focus:ring-0"
-          />
-        </div>
-        <div class="mb-4">
-          <textarea
-            formControlName="notes"
-            id="aclaraciones"
-            placeholder="Aclaraciones..."
-            class="h-32 w-full rounded-lg border-none bg-countdownBg p-4 text-textPrimary placeholder:text-textSecondary focus:border-none focus:outline-0 focus:ring-0"
-          ></textarea>
-        </div>
-        <div class="flex-col space-y-4">
-          <button
-            type="button"
-            (click)="closeAddItem()"
-            class="h-12 w-full rounded-lg bg-btnSecondary px-5 text-base font-bold leading-normal tracking-title text-textPrimary"
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            [disabled]="addItemForm.invalid"
-            class="h-12 w-full rounded-lg bg-btnPrimary px-5 text-base font-bold leading-normal tracking-title text-white"
-          >
-            Aceptar
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
+  <app-create-modal
+    *ngIf="isOpen"
+    (itemCreated)="addItem($event)"
+    (closed)="closeAddItem()"
+  ></app-create-modal>
 </div>
