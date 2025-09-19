@@ -1,27 +1,77 @@
-# Wishlist
+# 🎁 Wishlist App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
+A modern web application to create and manage wishlists for events like birthdays or weddings.
 
-## Development server
+Built with **Angular 17**, styled with **TailwindCSS**, and designed to deliver a clean and responsive user experience.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologías
 
-## Code scaffolding
+Las siguientes tecnologías se utilizan en este proyecto:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 📝 HTML5
+- 🎨 CSS3
+- 🔧 Angular
+- 💨 Tailwind CSS
+- 💻 TypeScript
 
-## Build
+## 💡 Motivation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Finding gifts is often stressful and can lead to duplicated presents or uncertainty about what the recipient would actually like.  
+**Wishlist App** solves this by letting users share their wishlists with friends and family.
 
-## Running unit tests
+- Friends can **claim gifts** so no one buys the same thing twice.
+- The recipient **never knows who claimed what** until the moment of receiving the gift 🎉
+- This way, everyone coordinates smoothly while keeping the surprise intact.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🚧 Planned features
 
-## Running end-to-end tests
+- Create and edit personal wishlists
+- Add items with notes and external links
+- Share your wishlist with friends so they know what gifts you’d love
+- Friends can **claim gifts** to avoid duplicates and distribute presents — and you’ll never know who claimed what until you receive it 🎉
+- Set an event date with a custom countdown
+- Fully responsive UI built with TailwindCSS (works on mobile, tablet, and desktop)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## 🚀 Getting Started
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Prerequisites
+
+- Node.js 18+ (check with `node -v`)
+- pnpm (install with `npm install -g pnpm`)
+
+### Installation & Usage
+
+```bash
+# Clone the repository
+git clone https://github.com/nicotole/wishlist-angular-frontend.git
+cd wishlist-angular-frontend
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm start
+
+# Build the project
+pnpm build
+
+# Run linter
+pnpm lint
+
+# Format code
+pnpm format
+
+# Check formatting
+pnpm format:check
+```
+
+---
+
+## Made with ❤️ by
+
+|                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Nicolás Toledo**                                                                                                                                                                                                                                                              | **Inaki Arzalluz**                                                                                                                                                                                                                                                                 | **Emiliano Escudero**                                                                                                                                                                                                                                                   | **Franco Lumovich**                                                                                                                                                                                                                                                                            |
+| [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nicolastoledodev/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/nicotole) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/inaki-arzalluz/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/InakiArzalluz) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/emiescu7/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/EmiEscu7) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/franco-lumovich-636329174/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/francolumovich) |
