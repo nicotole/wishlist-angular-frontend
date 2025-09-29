@@ -49,8 +49,8 @@
           required
           name="eventDate"
           class="peer h-14 w-full appearance-none rounded-lg border-none bg-countdownBg p-4 pr-12 text-textPrimary invalid:text-transparent focus:outline-0 focus:ring-0 [&::-webkit-calendar-picker-indicator]:opacity-0"
-          onfocus="this.showPicker && this.showPicker()"
-          onclick="this.showPicker && this.showPicker()"
+          #dateInput
+          (click)="dateInput.showPicker()"
         />
 
         <span
