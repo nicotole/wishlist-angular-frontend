@@ -2,7 +2,14 @@ import { Component, inject } from '@angular/core';
 import { CardComponent } from './card/card.component';
 import { Item } from '../../models/item.model';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { minLengthArray } from '../../validators/minLengthArray.validator';
 import {
   DEFAULT_IMG_MIME_TYPES,
@@ -23,6 +30,9 @@ export class CreateWishlistPage {
   acceptedTypes = DEFAULT_IMG_MIME_TYPES.join(',');
   private formBuilder = inject(FormBuilder);
   isOpen = false;
+  previewUrl: string | null = null;
+  private lastObjectUrl: string | null = null;
+
   form = this.formBuilder.group({
     title: this.formBuilder.nonNullable.control('', [Validators.required, Validators.minLength(3)]),
     eventDate: this.formBuilder.nonNullable.control('', [Validators.required]),
@@ -35,8 +45,6 @@ export class CreateWishlistPage {
       ],
     }),
   });
-
-  previewUrl: string | null = null;
 
   get itemsFA(): FormArray<FormGroup> {
     return this.form.get('items') as FormArray<FormGroup>;
@@ -83,5 +91,26 @@ export class CreateWishlistPage {
     ctrl?.setValue(file);
     ctrl?.markAsDirty();
     ctrl?.updateValueAndValidity();
+
+    if (this.lastObjectUrl) {
+      URL.revokeObjectURL(this.lastObjectUrl);
+      this.lastObjectUrl = null;
+    }
+
+    if (file instanceof File) {
+      const url = URL.createObjectURL(file);
+      this.previewUrl = url;
+      this.lastObjectUrl = url;
+    } else {
+      this.previewUrl = null;
+    }
+  }
+
+  get imageControl(): FormControl {
+    return this.form.get('image') as FormControl;
+  }
+
+  get selectedImage(): string | null {
+    return this.previewUrl;
   }
 }
