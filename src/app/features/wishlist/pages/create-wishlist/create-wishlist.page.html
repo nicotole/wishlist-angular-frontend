@@ -27,17 +27,8 @@
         *ngIf="previewUrl; else placeholder"
         class="relative flex min-h-[218px] w-full cursor-pointer flex-col justify-end overflow-hidden rounded-lg bg-white bg-cover bg-center bg-no-repeat"
         [ngClass]="{'border-2 border-red-500' : imageControl.invalid}"
-        [style.background-image]="previewUrl 
-        ? 'url(' + previewUrl + ')' 
-        : 'url(https://lh3.googleusercontent.com/aida-public/AB6AXuCDbXbrAOfl5gYVnOqBPhQ2PLkA1Mi1hd0su_1upiw7kcrqOE1PIichG1m4oKVGDFe173tQzbqbwUKpdit6-yJNBhu7DLPVCRBg41eXgL_d8VAMEV6BrIAQ_MrZ7c_j45h6mp6t0ugeVlqjSWVGEikQfhifAcWgbsanVoz3z_oLVkP0IkVC_l07QNmjgRl2XR4Isnpz5XaFdpRNCnbooQWfyct_r_4vGQknEXTEYuAd-4kdGjlrGmT1IaU-zvW1sEmwZ3aLdCs2C2w3)'"
-      >
-        <input
-          type="file"
-          [accept]="acceptedTypes"
-          (change)="onFileChange($event)"
-          class="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
-        />
-      </div>
+        [style.background-image]="previewUrl && 'url(' + previewUrl + ')'"
+      ></div>
       <p
         class="text-red-500"
         *ngIf="imageControl.invalid && (imageControl.dirty || imageControl.touched)"
@@ -47,9 +38,6 @@
       <ng-template #placeholder>
         <div
           class="relative flex min-h-[218px] w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-gray-300 bg-countdownBg text-textSecondary hover:border-gray-400"
-          (click)="fileInput.click()"
-          (keyup.enter)="fileInput.click()"
-          tabindex="0"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -64,16 +52,14 @@
           <div>
             <p class="mt-2 text-sm">Portada</p>
           </div>
-
-          <input
-            #fileInput
-            type="file"
-            [accept]="acceptedTypes"
-            (change)="onFileChange($event)"
-            class="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
-          />
         </div>
       </ng-template>
+      <input
+        type="file"
+        [accept]="acceptedTypes"
+        (change)="onFileChange($event)"
+        class="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
+      />
     </div>
     <div class="px-4 py-3">
       <input
